@@ -8,7 +8,14 @@ const ViewResumes = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
 
   return (
-    <div className="w-full min-h-screen flex font-serif bg-white p-4">
+    <div className="w-full min-h-screen flex font-serif bg-white p-4"
+    style={{
+        backgroundImage: "url('/mesh-gradient-1.png')", // Public folder path
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* Sidebar */}
       <Sidebar
         isExpanded={isSidebarExpanded}
@@ -27,7 +34,7 @@ const ViewResumes = () => {
 
         <div className="flex items-center justify-start gap-x-[25px] gap-y-[20px] mt-2 px-6 flex-wrap">
           {/* Resume Cards */}
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -52,7 +59,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-        <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+        <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -77,7 +84,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -102,7 +109,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -127,7 +134,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -152,7 +159,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -177,7 +184,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">
@@ -202,7 +209,7 @@ const ViewResumes = () => {
                 </Link>
             </div>
           </div>
-          <div className="w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
+          <div className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md">
             
             <h2 className="text-xl text-black font-semibold">Frontend Developer</h2>
             <p className="text-slate-600 text-left text-xs">

@@ -8,12 +8,12 @@ import React from "react";
 
 const FAQ = () => {
   return (
-    <div className="max-w-100vw max-h-100vh p-32 pb-4 pt-20 flex flex-col justify-center items-center ">
+    <div className="max-w-100vw max-h-100vh p-32 pb-4 pt-20 flex flex-col justify-center items-center  ">
       <h2 className="text-3xl font-bold text-center w-full font-serif mb-[50px]">
         Frequently Asked Questions
       </h2>
-      <div className=" w-full gap-[45px] p-[32px] flex justify-center items-center border-slate-200 border-t-[50%] border-l-2">
-        <div className="  w-[550px] h-[450px] rounded-[18px] transform skew-y-2 hover:skew-y-0 hover:rotate-1 hover:scale-105 transition-all duration-500 ease-in-out shadow-sm">
+      <div className="bg-white w-full gap-[45px] p-[32px] flex justify-center items-center border-slate-200 border-t-[50%] border-l-2 rounded-xl">
+        <div className="bg-white  w-[550px] h-[450px] rounded-[18px] transform skew-y-2 hover:skew-y-0 hover:rotate-1 hover:scale-105 transition-all duration-500 ease-in-out shadow-sm">
           <img
             src="./faq.webp"
             alt="FAQ"

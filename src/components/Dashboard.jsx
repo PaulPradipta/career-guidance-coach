@@ -8,7 +8,14 @@ const Dashboard = () => {
 
   return (
     // Make the main container fill the viewport height
-    <div className="w-full flex font-serif  min-h-screen p-8">
+    <div className="w-full flex font-serif  min-h-screen p-8"
+      style={{
+        backgroundImage: "url('/mesh-gradient-1.png')", // Public folder path
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* Sidebar */}
       <Sidebar
         isExpanded={isSidebarExpanded}

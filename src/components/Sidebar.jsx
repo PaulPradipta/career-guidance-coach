@@ -46,7 +46,7 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
                 {item.label}
               </Link>
               {!isExpanded && (
-                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-5 px-3 py-1 rounded bg-indigo-100 text-indigo-800 text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
+                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-5 px-3 py-1 rounded bg-white text-indigo-800 text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
                   {item.label}
                 </div>
               )}
