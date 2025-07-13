@@ -24,9 +24,9 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div
-        className={`transition-all duration-300 p-2 h-full mt-25 ${ // Removed mt-25, not needed for vertical centering
-          isSidebarExpanded ? 'ml-[270px]' : 'ml-[150px]'
-        } w-full flex flex-col justify-center items-start`} // Added flex-col, justify-center, items-start
+        className={`w-fit bg-white transition-all duration-300 p-2 py-8 rounded-2xl h-full mt-25 ${ // Removed mt-25, not needed for vertical centering
+          isSidebarExpanded ? 'ml-[350px]' : 'ml-[180px]'
+        }  flex flex-col justify-center items-start`} // Added flex-col, justify-center, items-start
       >
         <p className="text-md font-medium text-gray-600 text-left mb-6 ml-4"> {/* Added mb-6 and ml-4 for spacing */}
           Start building your future. Choose an action below to begin your journey.
