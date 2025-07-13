@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import HeroSection from "./HeroSection";
 const HomePage = () => {
   return (
-    <div className="flex flex-col space-y-4 max-w-90vw overflow-x-hidden ">
+    <div className="flex flex-col space-y-4 max-w-100vw overflow-x-hidden ">
       <Navbar />
       <HeroSection />
       <Features />
