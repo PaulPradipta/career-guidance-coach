@@ -1,0 +1,27 @@
+.nav-menus {
+    background-color: white;
+    color: black;
+    transition: all 0.3s;
+    padding: 12px 14px;
+    border-radius: 30px;
+    position: relative;
+}
+
+.nav-menus:hover {
+    color: #515ada;
+}
+
+.nav-menus::before {
+  content: '';
+  position: absolute;
+  bottom: 8px;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background-color: #515ada;
+  transition: all 0.5s;
+}
+
+.nav-menus:hover::before {
+  width: 100%;
+}
