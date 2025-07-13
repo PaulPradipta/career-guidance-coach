@@ -62,8 +62,8 @@ const Footer = () => {
         </div>
 
         <div className="w-[24%] h-full px-4 py-3 text-white space-y-4.5">
-          <h2 className="font-bold text-2xl ">Subscribe Newsletter</h2>
-          <p className="text-justify">
+          <h2 className="font-bold text-xl ">Subscribe Newsletter</h2>
+          <p className="text-justify text-sm">
             Combined With a Handy Platform & Top Notch Customer Support from Our
             Support Team
           </p>
@@ -74,7 +74,7 @@ const Footer = () => {
               className="w-[75%] px-4 py-3 rounded-[20px] outline-none bg-white text-gray-600"
             />
             <h2
-              className="px-4 py-3 rounded-[20px] outline-none  text-white absolute top-0 right-22"
+              className="px-4 py-3 rounded-[20px] outline-none  text-white absolute top-0 right-15"
               style={{
                 background: "linear-gradient(90deg, #efd5ff 0%, #515ada 100%)",
               }}

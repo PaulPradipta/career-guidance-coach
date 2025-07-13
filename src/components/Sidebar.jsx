@@ -27,7 +27,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="fixed left-4 top-1/2 -translate-y-1/2 flex flex-col h-[800px] p-2 rounded-2xl">
+    <aside className="fixed left-4 top-1/2 -translate-y-1/2 flex flex-col h-full p-2 rounded-2xl">
       <nav
         className={`h-full flex flex-col  border-r shadow-sm transition-all duration-300 bg-[#1E1E1E] rounded-2xl ${
           isExpanded ? "w-[270px]" : "w-16"

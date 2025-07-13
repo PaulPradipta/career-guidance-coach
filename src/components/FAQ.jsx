@@ -21,7 +21,7 @@ const FAQ = () => {
           />
         </div>
         <div className="w-[1200px] flex flex-col items-center justify-center space-y-3 ">
-          <Accordion type="single" collapsible className="w-full text-2xl">
+          <Accordion type="single" collapsible className="w-full ">
             <AccordionItem value="item-1">
               <AccordionTrigger className="font-bold">
                 How accurate are the career recommendations ?
