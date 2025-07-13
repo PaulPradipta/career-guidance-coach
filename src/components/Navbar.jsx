@@ -33,7 +33,7 @@ const Navbar = () => {
         >
           Sign In
         </Link>
-        <i className="ri-menu-line text-2xl md:hidden"></i>
+       
       </div>
     </div>
   )
