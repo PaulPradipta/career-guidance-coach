@@ -7,7 +7,7 @@ const HeroSection = () => {
       <div className="w-[55%] h-full rounded-2xl overflow-hidden relative">
         <img src="./hero-img.jpg" alt="" className="w-full h-full" />
       </div>
-      <div className="flex flex-1  bg-white justify-center z-50 absolute top-70 h-fit right-25 flex-col space-y-3.5 w-[800px] py-12 px-8 border-b-4 border-b-gray-700 shadow-sm">
+      <div className="flex flex-1  bg-white justify-center z-50 absolute top-62 h-fit right-10 flex-col space-y-3 w-[750px] py-12 px-8 border-b-4 border-b-gray-700 shadow-sm">
         <h2 className="text-4xl font-bold text-left w-full ">
           Craft Resumes. Create Careers.
         </h2>
