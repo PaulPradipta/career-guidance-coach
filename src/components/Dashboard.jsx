@@ -40,7 +40,7 @@ const Dashboard = () => {
             <p className="text-slate-600 text-center">
               Craft a job-winning resume that showcases your strengths and goals
             </p>
-            <Link to="/create-resume" className="button-54 px-6 py-3 border-2 border-black hover:bg-white hover:text-black bg-black text-white rounded-full text-base duration-300 inline-flex items-center justify-center">
+            <Link to="/resume-form" className="button-54 px-6 py-3 border-2 border-black hover:bg-white hover:text-black bg-black text-white rounded-full text-base duration-300 inline-flex items-center justify-center">
               Build My Resume
             </Link>
           </div>

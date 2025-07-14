@@ -34,7 +34,7 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
           {menus.map((item, index) => (
             <li
               key={index}
-              className="relative group flex items-center justify-start gap-3 p-2 font-medium rounded-md hover:bg-white hover:text-black cursor-pointer transition-colors"
+              className="relative group flex items-center justify-start gap-3 p-2 font-medium rounded-md ml-[0.1px] hover:bg-white hover:text-black cursor-pointer transition-colors"
             >
               <Link to={item.path} className="flex justify-center items-center w-6">{item.icon}</Link>
               <Link
@@ -56,7 +56,7 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
 
         {/* Logout */}
         <div className="p-3">
-          <button className="group relative flex items-center justify-start gap-3 w-full p-2 font-medium rounded-md text-gray-300 hover:bg-white hover:text-black transition-all">
+          <button className="group relative flex items-center justify-start gap-3 w-full rounded-md p-2 font-medium  text-gray-300 hover:bg-white hover:text-black transition-all">
             <i className="ri-logout-box-line text-lg flex items-center justify-center"></i>
             <span
               className={`whitespace-nowrap transition-all duration-300 ${
