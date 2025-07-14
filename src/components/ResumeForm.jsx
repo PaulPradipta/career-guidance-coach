@@ -135,7 +135,7 @@ const ResumeForm = () => {
 
         {/* PERSONAL INFORMATION SECTION */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-4">Personal Information</h2>
+          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-black pb-2 mb-4">Personal Information</h2>
           <div className="grid md:grid-cols-2 gap-4 mt-4">
             {["name", "role", "phone", "email", "linkedin", "github"].map((field) => (
               <input
@@ -176,7 +176,7 @@ const ResumeForm = () => {
         {/* EXPERIENCE SECTION (Conditionally rendered) */}
         {formData.hasExperience && (
           <section>
-            <h2 className="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-4">Experience</h2>
+            <h2 className="text-xl font-bold text-gray-800 border-b-2 border-black pb-2 mb-4">Experience</h2>
             {experiences.map((exp, i) => (
               <div key={i} className="bg-white p-4 my-3 rounded-xl shadow-md border border-gray-200 space-y-3">
                 <div className="flex justify-end">
@@ -210,7 +210,7 @@ const ResumeForm = () => {
 
         {/* EDUCATION SECTION */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-4">Education</h2>
+          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-black pb-2 mb-4">Education</h2>
           {education.map((edu, i) => (
             <div key={i} className="bg-white p-4 my-3 rounded-xl shadow-md border border-gray-200 space-y-3">
               <div className="flex justify-end">
@@ -232,7 +232,7 @@ const ResumeForm = () => {
 
         {/* SKILLS SECTION */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-4">Skills</h2>
+          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-black pb-2 mb-4">Skills</h2>
           {skills.map((skill, i) => (
             <div key={i} className="flex items-center bg-white p-3 my-2 rounded-xl shadow-md border border-gray-200">
               <input placeholder="Skill Name (e.g., JavaScript, React, SQL)" value={skill.name} onChange={(e) => handleArrayChange(setSkills, i, "name", e.target.value)} className="flex-1 p-2 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
@@ -246,7 +246,7 @@ const ResumeForm = () => {
 
         {/* PROJECTS SECTION */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-4">Projects</h2>
+          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-black pb-2 mb-4">Projects</h2>
           {projects.map((proj, i) => (
             <div key={i} className="bg-white p-4 my-3 rounded-xl shadow-md border border-gray-200 space-y-3">
               <div className="flex justify-end">
@@ -255,7 +255,7 @@ const ResumeForm = () => {
               <input placeholder="Project Name" value={proj.name} onChange={(e) => handleArrayChange(setProjects, i, "name", e.target.value)} className="w-full p-2 my-1 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
               <input placeholder="Technologies Used (e.g., React, Node.js, MongoDB)" value={proj.techStack} onChange={(e) => handleArrayChange(setProjects, i, "techStack", e.target.value)} className="w-full p-2 my-1 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
               <input type="url" placeholder="Live Demo Link (Optional)" value={proj.liveLink} onChange={(e) => handleArrayChange(setProjects, i, "liveLink", e.target.value)} className="w-full p-2 my-1 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
-              <label className="block text-sm text-gray-600 mb-1">Project Descriptions (2 bullet points):</label>
+              
               {proj.descriptions.map((desc, j) => (
                 <input key={j} placeholder={`Description ${j + 1}`} value={desc} onChange={(e) => handleNestedArrayChange(setProjects, i, j, e.target.value, "descriptions")} className="w-full p-2 my-1 bg-gray-100 rounded-lg outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-200" />
               ))}
@@ -268,7 +268,7 @@ const ResumeForm = () => {
 
         {/* CERTIFICATIONS SECTION */}
         <section>
-          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-blue-500 pb-2 mb-4">Certifications</h2>
+          <h2 className="text-xl font-bold text-gray-800 border-b-2 border-black pb-2 mb-4">Certifications</h2>
           {certifications.map((cert, i) => (
             <div key={i} className="bg-white p-4 my-3 rounded-xl shadow-md border border-gray-200 space-y-3">
               <div className="flex justify-end">

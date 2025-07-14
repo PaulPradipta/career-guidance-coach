@@ -18,7 +18,7 @@ const ResumePreview = () => {
       if (state) {
         // If data is passed via navigation state (from ResumeForm after submission)
         setResumeData(state);
-        setMessage("Resume data loaded from form.");
+        // setMessage("Resume data loaded from form.");
       } else if (userId) {
         // If no state (e.g., direct URL access or page refresh), try fetching from backend
         try {
@@ -30,7 +30,7 @@ const ResumePreview = () => {
           }
           const data = await response.json();
           setResumeData(data);
-          setMessage("Resume data fetched successfully from backend.");
+          // setMessage("Resume data fetched successfully from backend.");
         } catch (error) {
           console.error("Error fetching resume:", error);
           setMessage("Resume not found or failed to load: " + error.message + ". Redirecting to form.");
@@ -73,8 +73,8 @@ const ResumePreview = () => {
       }
 
       pdf.save(`${resumeData.name || "resume"}.pdf`);
-      setMessage("PDF successfully generated and downloaded!");
-      setTimeout(() => navigate("/viewresumes"), 1000); // Redirect to view resumes page
+      // setMessage("PDF successfully generated and downloaded!");
+      setTimeout(() => navigate("/viewresumes"), 2000); // Redirect to view resumes page
     } catch (error) {
       console.error("PDF generation error:", error);
       setMessage("Failed to download PDF. Please try again.");
@@ -115,6 +115,7 @@ const ResumePreview = () => {
       <div style={{ textAlign: "right", marginBottom: "20px" }}>
         <button
           onClick={handleDownloadPDF}
+          className="hover:transform-scale-105 transition-all duration-300"
           style={{
             backgroundColor: "#000",
             color: "#fff",
@@ -122,6 +123,7 @@ const ResumePreview = () => {
             borderRadius: "6px",
             border: "none",
             cursor: "pointer",
+            fontWeight: "bold"
           }}
         >
           Download PDF
@@ -186,7 +188,7 @@ const ResumePreview = () => {
                 <p><em>{edu.school}</em></p>
                 <div style={{ display: "flex", justifyContent: "space-between" }}>
                   <p><strong>CGPA:</strong> {edu.cgpa}</p>
-                  <p>{edu.startYear} – {edu.endYear}</p>
+                  <p>{edu.startYear || edu.start_year} – {edu.endYear || edu.end_year}</p>
                 </div>
               </div>
             ))}
@@ -201,9 +203,9 @@ const ResumePreview = () => {
             {projects.map((proj, index) => (
               <div key={index} style={{ marginBottom: "16px" }}>
                 <p>
-                  <strong>{proj.name}</strong> || <em>{proj.techStack}</em>{" "}
+                  <strong>{proj.name}</strong> || <em>{proj.techStack}</em> || {" "}
                   {proj.liveLink && (
-                    <a href={proj.liveLink} target="_blank" rel="noopener noreferrer"><strong>[Live]</strong></a>
+                    <a href={proj.liveLink} target="_blank" rel="noopener noreferrer"><strong>[Live Demo]</strong></a>
                   )}
                 </p>
                 <ul style={{ paddingLeft: "18px", marginTop: "6px" }}>
