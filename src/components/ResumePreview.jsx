@@ -4,6 +4,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import 'remixicon/fonts/remixicon.css';
 
+
 const ResumePreview = () => {
   const { userId } = useParams(); // Get ID from URL parameters (e.g., from /resume/preview/123)
   const { state } = useLocation(); // Get state passed from navigation (e.g., from ResumeForm)
@@ -18,6 +19,7 @@ const ResumePreview = () => {
       if (state) {
         // If data is passed via navigation state (from ResumeForm after submission)
         setResumeData(state);
+        
         // setMessage("Resume data loaded from form.");
       } else if (userId) {
         // If no state (e.g., direct URL access or page refresh), try fetching from backend
@@ -203,9 +205,9 @@ const ResumePreview = () => {
             {projects.map((proj, index) => (
               <div key={index} style={{ marginBottom: "16px" }}>
                 <p>
-                  <strong>{proj.name}</strong> || <em>{proj.techStack}</em> || {" "}
-                  {proj.liveLink && (
-                    <a href={proj.liveLink} target="_blank" rel="noopener noreferrer"><strong>[Live Demo]</strong></a>
+                  <strong>{proj.name}</strong> || <em>{proj.techStack || proj.tech_stack}</em> || {" "}
+                  {(proj.liveLink || proj.live_link) && (
+                    <a href={proj.liveLink || proj.live_link} target="_blank" rel="noopener noreferrer"><strong>[Live Demo]</strong></a>
                   )}
                 </p>
                 <ul style={{ paddingLeft: "18px", marginTop: "6px" }}>

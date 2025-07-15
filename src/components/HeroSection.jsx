@@ -19,10 +19,16 @@ const HeroSection = () => {
           resumes that highlight what matters most.
         </p>
         <Link
-            to="/dashboard"
-            className="cursor-pointer font-semibold text-md w-fit px-8 py-4 border-2 border-white bg-black text-white hover:bg-white hover:text-black hover:border-2 hover:border-black duration-500 transition-all "
+          to="/dashboard"
+          className="cursor-pointer font-semibold text-md w-fit px-8 py-4  text-black rounded-3xl  duration-500 transition-all "
+          style={{
+            backgroundImage: "url('/mesh-gradient-1.png')", // Public folder path
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
         >
-            Get Started
+          Get Started
         </Link>
       </div>
     </div>

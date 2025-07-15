@@ -2,17 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import 'remixicon/fonts/remixicon.css';
+import toast, { Toaster } from 'react-hot-toast';
 
 const ViewResumes = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
   const [resumes, setResumes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const notify = () => toast.success('Resume Created Successfully');
 
   useEffect(() => {
     const fetchResumes = async () => {
       try {
         const response = await fetch('http://localhost:3001/api/resumes/all-resumes');
+        
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Failed to fetch resumes');
@@ -64,7 +67,14 @@ const ViewResumes = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex font-serif bg-white p-4">
+    <div className="w-full min-h-screen flex font-serif bg-white p-4"
+     style={{
+        backgroundImage: "url('/mesh-gradient-1.png')", // Public folder path
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
       {/* Sidebar */}
       <Sidebar
         isExpanded={isSidebarExpanded}
@@ -93,7 +103,7 @@ const ViewResumes = () => {
                 </div>
                 <div className="flex items-center justify-start w-full gap-3">
                   {/* View Resume with dynamic ID */}
-                  <Link to={`/resume/preview/${resume.id}`} className="flex justify-center items-center hover:bg-gray-200 duration-300 transition-all border-gray-300 border-1 px-3 py-1 gap-x-2.5 rounded-[10px] text-gray-700">
+                  <Link to={`/resume/preview/${resume.id}`} onClick={notify} className="flex justify-center items-center hover:bg-gray-200 duration-300 transition-all border-gray-300 border-1 px-3 py-1 gap-x-2.5 rounded-[10px] text-gray-700">
                     <i className="ri-eye-line"></i>
                     <span>View</span>
                   </Link>
