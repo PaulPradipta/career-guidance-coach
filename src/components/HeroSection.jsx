@@ -1,13 +1,37 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const HeroSection = () => {
+
+  const getStartedRef = useRef();
+
+  useGSAP(()=>{
+    gsap.from(getStartedRef.current,{
+      y:-800,
+      delay:2,
+      duration:2
+    })
+  })
+
+  const imageRef = useRef();
+
+  useGSAP(()=>{
+    gsap.from(imageRef.current,{
+      opacity:0,
+      delay:1,
+      duration:2
+    })
+  })
+
+
   return (
-    <div className=" h-[600px] w-full mt-[120px] px-24 py-12  gap-5 font-serif">
-      <div className="w-[55%] h-full rounded-2xl overflow-hidden relative">
+    <div className=" h-[600px] w-full mt-[120px] px-24 py-12  gap-5 font-serif overflow-x-hidden">
+      <div  ref={imageRef} className="w-[55%] h-full rounded-2xl overflow-hidden relative">
         <img src="./hero-img.jpg" alt="" className="w-full h-full" />
       </div>
-      <div className="flex flex-1  bg-white justify-center z-50 absolute top-62 h-fit right-10 flex-col space-y-3 w-[750px] py-12 px-8 border-b-4 border-b-gray-700 shadow-sm">
+      <div ref={getStartedRef} className="flex flex-1  bg-white justify-center z-50 absolute top-62 h-fit right-10 flex-col space-y-3 w-[750px] py-12 px-8 border-b-4 border-b-gray-700 shadow-sm">
         <h2 className="text-4xl font-bold text-left w-full ">
           Craft Resumes. Create Careers.
         </h2>

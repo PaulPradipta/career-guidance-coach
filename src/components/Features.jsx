@@ -3,16 +3,23 @@ import {
   FileText,
   GraduationCap,
 } from "lucide-react";
-import React from "react";
+import React, { useRef } from "react";
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 const Features = () => {
+
+  const featuresRef = useRef();
+
+
+
   return (
     <div className="mt-20 p-32">
       <h2 className="text-3xl font-bold text-center w-full font-serif mb-[20px] ">
         How We Help You Succeed
       </h2>
       <p className="text-gray-600 text-xl font-serif text-center w-full m-4">Our platform leverages cutting-edge technology to provide you with the best tools for career advancement.</p>
-      <div className="border-b-2 border-l-2 border-white w-full gap-[45px] p-[32px] flex justify-center items-center">
+      <div ref={featuresRef} className="border-b-2 border-l-2 border-white w-full gap-[45px] p-[32px] flex justify-center items-center">
         <div className="bg-white text-center rounded-xl shadow flex flex-col items-center w-[450px] h-fit gap-4 duration-500 relative overflow-hidden transform transition hover:scale-105 hover:rotate-[1deg] hover:shadow-3xl">
           {/* Image Section */}
           <div className="w-full h-[200px] overflow-hidden rounded-t-xl">
@@ -29,7 +36,7 @@ const Features = () => {
               <GraduationCap className="w-20 h-20 rounded-full p-4 bg-white hover:text-[#6C63FF] border-2 border-[#eee] shadow-md transition duration-300 hover:scale-110" />
             </div>
 
-            <h2 className="text-black font-bold text-2xl font-serif mt-12">
+            <h2 className="text-black font-bold text-xl font-serif mt-12">
               Personalized Career Paths
             </h2>
             <p className="text-justify text-gray-400 text-base font-medium">
@@ -55,7 +62,7 @@ const Features = () => {
               <FileText  className="w-20 h-20 rounded-full p-4 bg-white hover:text-[#6C63FF] border-2 border-[#eee] shadow-md transition duration-300 hover:scale-110" />
             </div>
 
-            <h2 className="text-black font-bold text-2xl font-serif mt-12">
+            <h2 className="text-black font-bold text-xl font-serif mt-12">
                Smart Resume Builder
             </h2>
             <p className="text-justify text-gray-400 text-base font-medium">
@@ -81,7 +88,7 @@ const Features = () => {
               <ChartNoAxesColumnIncreasing className="w-20 h-20 rounded-full p-4 bg-white hover:text-[#6C63FF] border-2 border-[#eee] shadow-md transition duration-300 hover:scale-110" />
             </div>
 
-            <h2 className="text-black font-bold text-2xl font-serif mt-12">
+            <h2 className="text-black font-bold text-xl font-serif mt-12">
               Skills Gap Analysis
             </h2>
             <p className="text-justify text-gray-400 text-base font-medium">
