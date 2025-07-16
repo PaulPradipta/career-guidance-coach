@@ -20,7 +20,6 @@ const HeroSection = () => {
   useGSAP(()=>{
     gsap.from(imageRef.current,{
       opacity:0,
-      delay:1,
       duration:2
     })
   })
