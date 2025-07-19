@@ -10,8 +10,8 @@ const HeroSection = () => {
   useGSAP(()=>{
     gsap.from(getStartedRef.current,{
       y:-800,
-      delay:2,
-      duration:2
+      delay:1,
+      duration:1
     })
   })
 
