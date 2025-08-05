@@ -1,85 +1,102 @@
 import React, { useEffect, useRef, useState } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom"; // Added useLocation
+import { useParams, useNavigate, useLocation } from "react-router-dom";
 import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
+import domtoimage from "dom-to-image";
 import 'remixicon/fonts/remixicon.css';
 
-
 const ResumePreview = () => {
-  const { userId } = useParams(); // Get ID from URL parameters (e.g., from /resume/preview/123)
-  const { state } = useLocation(); // Get state passed from navigation (e.g., from ResumeForm)
+  const { userId } = useParams();
+  const { state } = useLocation();
   const resumeRef = useRef(null);
   const navigate = useNavigate();
   const [resumeData, setResumeData] = useState(null);
-  const [message, setMessage] = useState(""); // State for custom message box
+  const [message, setMessage] = useState("");
 
   // Fetch resume by ID or use state from navigation
   useEffect(() => {
     const loadResume = async () => {
       if (state) {
-        // If data is passed via navigation state (from ResumeForm after submission)
         setResumeData(state);
-        
-        // setMessage("Resume data loaded from form.");
       } else if (userId) {
-        // If no state (e.g., direct URL access or page refresh), try fetching from backend
         try {
-          const response = await fetch(`http://localhost:3001/api/resumes/${userId}`);
+         const response = await fetch(`http://localhost:3001/api/resumes/${userId}`);
           if (!response.ok) {
-            // If response is not OK (e.g., 404, 500), throw an error with more details
-            const errorData = await response.json().catch(() => ({ error: "Unknown error format" })); // Safely parse JSON
+            const errorData = await response.json().catch(() => ({ error: "Unknown error format" }));
             throw new Error(errorData.error || "Resume not found");
           }
           const data = await response.json();
           setResumeData(data);
-          // setMessage("Resume data fetched successfully from backend.");
         } catch (error) {
           console.error("Error fetching resume:", error);
           setMessage("Resume not found or failed to load: " + error.message + ". Redirecting to form.");
-          // Redirect to the form if data cannot be fetched
           setTimeout(() => navigate("/resume-form"), 2000);
         }
       } else {
-        // If neither state nor userId is available, prompt user to create a resume
         setMessage("No resume data to preview. Please create a resume first. Redirecting to form.");
         setTimeout(() => navigate("/resume-form"), 2000);
       }
     };
     loadResume();
-  }, [state, userId, navigate]); // Dependencies: re-run if state, userId, or navigate changes
+  }, [state, userId, navigate]);
 
-  // Download PDF
+  // Download PDF using dom-to-image
   const handleDownloadPDF = async () => {
     try {
-      const canvas = await html2canvas(resumeRef.current, {
-        scale: 2,
-        useCORS: true,
-        backgroundColor: "#ffffff",
-      });
-      const imgData = canvas.toDataURL("image/png");
-      const pdf = new jsPDF("p", "mm", "a4");
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-
-      let position = 0;
-      const imgHeight = canvas.height * pdfWidth / canvas.width;
-
-      // Add image to PDF, handling multiple pages if content is long
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-      position -= pdfHeight;
-
-      while (position > -imgHeight) {
-          position -= pdfHeight;
-          pdf.addPage();
-          pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
+      setMessage("Generating PDF...");
+      
+      // Hide the message during PDF generation
+      const messageElement = document.querySelector('[data-message-box]');
+      if (messageElement) {
+        messageElement.style.display = 'none';
       }
 
-      pdf.save(`${resumeData.name || "resume"}.pdf`);
-      // setMessage("PDF successfully generated and downloaded!");
-      setTimeout(() => navigate("/viewresumes"), 2000); // Redirect to view resumes page
+      // Generate image from DOM
+      const dataUrl = await domtoimage.toPng(resumeRef.current, {
+        quality: 1.0,
+        bgcolor: '#ffffff',
+        width: resumeRef.current.offsetWidth,
+        height: resumeRef.current.offsetHeight,
+        style: {
+          transform: 'scale(1)',
+          transformOrigin: 'top left'
+        }
+      });
+
+      // Create PDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = pdf.internal.pageSize.getHeight();
+      
+      // Calculate image dimensions to fit in PDF
+      const img = new Image();
+      img.onload = function() {
+        const imgWidth = this.width;
+        const imgHeight = this.height;
+        const ratio = Math.min(pdfWidth / (imgWidth * 0.264583), pdfHeight / (imgHeight * 0.264583));
+        const width = imgWidth * 0.264583 * ratio;
+        const height = imgHeight * 0.264583 * ratio;
+        const x = (pdfWidth - width) / 2;
+        const y = 10;
+
+        pdf.addImage(dataUrl, 'PNG', x, y, width, height);
+        pdf.save(`${resumeData.name || "resume"}.pdf`);
+        
+        setMessage("PDF successfully generated and downloaded!");
+        setTimeout(() => {
+          setMessage("");
+          navigate("/viewresumes");
+        }, 2000);
+      };
+      img.src = dataUrl;
+
+      // Restore message box
+      if (messageElement) {
+        messageElement.style.display = 'flex';
+      }
+
     } catch (error) {
       console.error("PDF generation error:", error);
-      setMessage("Failed to download PDF. Please try again.");
+      setMessage("Failed to download PDF. Error: " + error.message);
     }
   };
 
@@ -108,16 +125,44 @@ const ResumePreview = () => {
     <div style={{ backgroundColor: "#f5f5f5", padding: "30px" }}>
       {/* Custom Message Alert */}
       {message && (
-        <div className="fixed top-4 right-4 bg-blue-600 text-white p-3 rounded-lg z-50 shadow-md flex justify-between items-center gap-4">
+        <div 
+          data-message-box
+          style={{
+            position: "fixed",
+            top: "16px",
+            right: "16px",
+            backgroundColor: "#2563eb",
+            color: "white",
+            padding: "12px",
+            borderRadius: "8px",
+            zIndex: "50",
+            boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "16px"
+          }}
+        >
           <span>{message}</span>
-          <button onClick={() => setMessage("")} className="font-bold text-lg">&times;</button>
+          <button 
+            onClick={() => setMessage("")}
+            style={{
+              fontWeight: "bold",
+              fontSize: "18px",
+              background: "none",
+              border: "none",
+              color: "white",
+              cursor: "pointer"
+            }}
+          >
+            &times;
+          </button>
         </div>
       )}
 
       <div style={{ textAlign: "right", marginBottom: "20px" }}>
         <button
           onClick={handleDownloadPDF}
-          className="hover:transform-scale-105 transition-all duration-300"
           style={{
             backgroundColor: "#000",
             color: "#fff",
@@ -125,8 +170,11 @@ const ResumePreview = () => {
             borderRadius: "6px",
             border: "none",
             cursor: "pointer",
-            fontWeight: "bold"
+            fontWeight: "bold",
+            transition: "transform 0.3s ease"
           }}
+          onMouseOver={(e) => e.target.style.transform = "scale(1.05)"}
+          onMouseOut={(e) => e.target.style.transform = "scale(1)"}
         >
           Download PDF
         </button>
