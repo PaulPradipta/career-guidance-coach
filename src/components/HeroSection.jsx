@@ -35,7 +35,7 @@ const HeroSection = () => {
           Craft Resumes. Create Careers.
         </h2>
         <p className="text-xl text-justify text-gray-600">
-          An AI-powered web app guiding students and professionals toward ideal
+          An Web App guiding students and professionals toward ideal
           career paths. Get personalized recommendations based on your skills,
           education, and goals. Explore tailored career options backed by
           machine learning and expert insights. Build smart, role-specific

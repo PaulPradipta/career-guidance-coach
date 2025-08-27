@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Sidebar from './Sidebar';
 import { Link } from 'react-router-dom';
 import 'remixicon/fonts/remixicon.css';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 const ViewResumes = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true);
@@ -14,12 +14,18 @@ const ViewResumes = () => {
   useEffect(() => {
     const fetchResumes = async () => {
       try {
-        const response = await fetch('http://localhost:3001/api/resumes/all-resumes');
-        
+        const token = localStorage.getItem('token'); // 👈 JWT stored after login
+        const response = await fetch('http://localhost:3001/api/resumes', {
+          headers: {
+            Authorization: `Bearer ${token}`, // 👈 secure request
+          },
+        });
+
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Failed to fetch resumes');
         }
+
         const data = await response.json();
         setResumes(data);
       } catch (err) {
@@ -35,15 +41,22 @@ const ViewResumes = () => {
 
   const handleDeleteResume = async (id) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await fetch(`http://localhost:3001/api/resumes/${id}`, {
         method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${token}`, // 👈 secure request
+        },
       });
+
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || 'Failed to delete resume');
       }
-      // Remove the deleted resume from state
-      setResumes(resumes.filter(resume => resume.id !== id));
+
+      // Remove from state
+      setResumes(resumes.filter((resume) => resume.id !== id));
+      toast.success('Resume Deleted Successfully');
     } catch (err) {
       console.error(`Failed to delete resume with ID ${id}:`, err);
       setError(err.message);
@@ -67,12 +80,13 @@ const ViewResumes = () => {
   }
 
   return (
-    <div className="w-full min-h-screen flex font-serif bg-white p-4"
-     style={{
+    <div
+      className="w-full min-h-screen flex font-serif bg-white p-4"
+      style={{
         backgroundImage: "url('/mesh-gradient-1.png')", // Public folder path
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
       }}
     >
       {/* Sidebar */}
@@ -82,15 +96,22 @@ const ViewResumes = () => {
       />
 
       {/* Main Content */}
-      <div className={`transition-all duration-300 px-2 pb-4 pt-1 h-full ${isSidebarExpanded ? 'ml-[270px]' : 'ml-[150px]'} w-full`}>
+      <div
+        className={`transition-all duration-300 px-2 pb-4 pt-1 h-full ${
+          isSidebarExpanded ? 'ml-[270px]' : 'ml-[150px]'
+        } w-full`}
+      >
         <h2 className="text-xl font-medium text-black text-left px-6 mb-6">
-          All Your Resumes
+          My Resumes
         </h2>
 
         <div className="flex items-center justify-start gap-x-[25px] gap-y-[20px] mt-2 px-6 flex-wrap">
           {resumes.length > 0 ? (
             resumes.map((resume) => (
-              <div key={resume.id} className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md hover:shadow-lg transition-shadow duration-300">
+              <div
+                key={resume.id}
+                className="bg-white w-[340px] h-[200px] shadow-md flex flex-col items-start justify-center px-4 py-2 space-y-4 border-2 border-slate-200 rounded-md hover:shadow-lg transition-shadow duration-300"
+              >
                 <h2 className="text-xl text-black font-semibold">{resume.role}</h2>
                 <p className="text-slate-600 text-left text-xs">
                   Resume of {resume.name} — For {resume.role}.
@@ -102,20 +123,30 @@ const ViewResumes = () => {
                   </span>
                 </div>
                 <div className="flex items-center justify-start w-full gap-3">
-                  {/* View Resume with dynamic ID */}
-                  <Link to={`/resume/preview/${resume.id}`} onClick={notify} className="flex justify-center items-center hover:bg-gray-200 duration-300 transition-all border-gray-300 border-1 px-3 py-1 gap-x-2.5 rounded-[10px] text-gray-700">
+                  {/* View Resume */}
+                  <Link
+                    to={`/resume/preview/${resume.id}`}
+                    onClick={notify}
+                    className="flex justify-center items-center hover:bg-gray-200 duration-300 transition-all border-gray-300 border-1 px-3 py-1 gap-x-2.5 rounded-[10px] text-gray-700"
+                  >
                     <i className="ri-eye-line"></i>
                     <span>View</span>
                   </Link>
 
-                  {/* Edit Resume with dynamic ID */}
-                  <Link to={`/resume/edit/${resume.id}`} className="flex justify-center items-center hover:bg-gray-200 duration-300 transition-all border-gray-300 border-1 px-3 py-1 gap-x-2.5 rounded-[10px] text-gray-700">
+                  {/* Edit Resume */}
+                  <Link
+                    to={`/resume/edit/${resume.id}`}
+                    className="flex justify-center items-center hover:bg-gray-200 duration-300 transition-all border-gray-300 border-1 px-3 py-1 gap-x-2.5 rounded-[10px] text-gray-700"
+                  >
                     <i className="ri-edit-box-line"></i>
                     <span>Edit</span>
                   </Link>
 
-                  {/* Delete Button (add actual delete logic) */}
-                  <button className="flex justify-center items-center bg-red-500 hover:bg-red-600 text-white duration-300 transition-all border-red-500 border-1 px-3 py-1 gap-x-2.5 rounded-[10px]" onClick={() => handleDeleteResume(resume.id)}>
+                  {/* Delete Resume */}
+                  <button
+                    className="flex justify-center items-center bg-red-500 hover:bg-red-600 text-white duration-300 transition-all border-red-500 border-1 px-3 py-1 gap-x-2.5 rounded-[10px]"
+                    onClick={() => handleDeleteResume(resume.id)}
+                  >
                     <i className="ri-delete-bin-line"></i>
                     <span>Delete</span>
                   </button>
@@ -123,7 +154,9 @@ const ViewResumes = () => {
               </div>
             ))
           ) : (
-            <p className="text-sm text-gray-600">No resumes found. Please create one!</p>
+            <p className="text-sm text-gray-600">
+              No resumes found. Please create one!
+            </p>
           )}
         </div>
       </div>

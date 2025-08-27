@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/viewresumes" element={<ViewResumes/>}/>
           <Route path="/resume-form" element={<ResumeForm/>}/>
           {/* This route now correctly matches the navigation in ResumeForm */}
-          <Route path="/resume/preview/:userId" element={<ResumePreview/>}/>
+          <Route path="/resume/preview/:id" element={<ResumePreview/>}/>
           <Route path="/signin" element={<Signin/>}/>
           <Route path="/signup" element={<Signup/>}/>
         </Routes>

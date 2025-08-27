@@ -1,11 +1,67 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import 'remixicon/fonts/remixicon.css'
-import "./Navbar.css"
+// import React from 'react'
+// import { Link } from 'react-router-dom'
+// import 'remixicon/fonts/remixicon.css'
+// import "./Navbar.css"
+// import 'animate.css';
+
+// const Navbar = () => {
+  
+
+//   return (
+//     <div className='fixed z-9999 left-20 w-[90%] h-[80px] mx-auto mt-4 rounded-[32px] bg-white px-6 flex items-center justify-between shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_8px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] perspective-1000 font-serif'>
+      
+//       {/* Logo */}
+//       <div className='flex items-center gap-x-3'>
+//         <img
+//           src="./logo.png"
+//           alt="logo"
+//           className='w-12 h-12 drop-shadow-md'
+//         />
+//         <h2 className='text-xl font-semibold text-black'>Career Path AI</h2>
+//       </div>
+
+      
+
+//       {/* Sign In */}
+//       <div className='flex items-center gap-3'>
+//         <Link
+//           className='py-2.5 px-6 text-white rounded-[32px] shadow-[inset_0_0_5px_rgba(255,255,255,0.2)] transition-all duration-300 hover:brightness-110'
+//           style={{
+//             background: "linear-gradient(90deg, #efd5ff 0%, #515ada 100%)"
+//           }}
+//           to="/signin"
+//         >
+//           Sign In
+//         </Link>
+       
+//       </div>
+//     </div>
+//   )
+// }
+
+// export default Navbar
+
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import 'remixicon/fonts/remixicon.css';
+import './Navbar.css';
 import 'animate.css';
 
 const Navbar = () => {
-  
+  const [user, setUser] = useState(null);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/Signin");
+  };
 
   return (
     <div className='fixed z-9999 left-20 w-[90%] h-[80px] mx-auto mt-4 rounded-[32px] bg-white px-6 flex items-center justify-between shadow-[0_4px_10px_rgba(0,0,0,0.1),_0_8px_20px_rgba(0,0,0,0.08)] transition-transform duration-300 hover:scale-[1.01] hover:shadow-[0_8px_20px_rgba(0,0,0,0.15)] perspective-1000 font-serif'>
@@ -20,23 +76,39 @@ const Navbar = () => {
         <h2 className='text-xl font-semibold text-black'>Career Path AI</h2>
       </div>
 
-      
-
-      {/* Sign In */}
+      {/* Right side */}
       <div className='flex items-center gap-3'>
-        <Link
-          className='py-2.5 px-6 text-white rounded-[32px] shadow-[inset_0_0_5px_rgba(255,255,255,0.2)] transition-all duration-300 hover:brightness-110'
-          style={{
-            background: "linear-gradient(90deg, #efd5ff 0%, #515ada 100%)"
-          }}
-          to="/signin"
-        >
-          Sign In
-        </Link>
-       
+        {user ? (
+          <>
+           <h3 className="text-lg font-semibold bg-gradient-to-r from-purple-500 via-pink-500 to-red-500 bg-clip-text text-transparent animate__animated animate__fadeInDown">
+              👋 Welcome, <span className="capitalize">{user.name}</span>
+           </h3>
+
+           <button
+            onClick={handleLogout}
+            className='py-2.5 px-6 text-white rounded-[32px] shadow-[inset_0_0_5px_rgba(255,255,255,0.2)] transition-all duration-300 hover:brightness-110 cursor-pointer'
+            style={{
+              background: "linear-gradient(90deg, #ffbcbc 0%, #d95050 100%)"
+            }}
+          >
+            Logout
+          </button>
+
+          </>
+        ) : (
+          <Link
+            className='py-2.5 px-6 text-white rounded-[32px] shadow-[inset_0_0_5px_rgba(255,255,255,0.2)] transition-all duration-300 hover:brightness-110'
+            style={{
+              background: "linear-gradient(90deg, #efd5ff 0%, #515ada 100%)"
+            }}
+            to="/signin"
+          >
+            Sign In
+          </Link>
+        )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

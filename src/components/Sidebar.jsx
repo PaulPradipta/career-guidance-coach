@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import "remixicon/fonts/remixicon.css";
 
 const Sidebar = ({ isExpanded, toggleSidebar }) => {
@@ -9,6 +9,13 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
     { label: "History", icon: <i className="ri-time-line text-xl"></i>, path: "/viewresumes" },
   ];
 
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/");
+  };
+ 
   return (
     <aside className="max-h-screen fixed top-10 bottom-10 ">
       <nav
@@ -56,20 +63,22 @@ const Sidebar = ({ isExpanded, toggleSidebar }) => {
 
         {/* Logout */}
         <div className="p-3">
-          <button className="group relative flex items-center justify-start gap-3 w-full rounded-md p-2 font-medium  text-gray-300 hover:bg-white hover:text-black transition-all">
-            <i className="ri-logout-box-line text-lg flex items-center justify-center"></i>
-            <span
-              className={`whitespace-nowrap transition-all duration-300 ${
-                isExpanded ? "opacity-100 ml-2" : "opacity-0 w-0 overflow-hidden"
-              }`}
-            >
-              Logout
-            </span>
-            {!isExpanded && (
-              <div className="absolute left-full top-1/2 -translate-y-1/2 ml-5 px-3 py-1 rounded bg-indigo-100 text-indigo-800 text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
+          <button 
+           onClick={handleLogout}
+            className="group relative flex items-center justify-start gap-3 w-full rounded-md p-2 font-medium  text-gray-300 hover:bg-white hover:text-black transition-all cursor-pointer">
+              <i className="ri-logout-box-line text-lg flex items-center justify-center"></i>
+              <span
+                className={`whitespace-nowrap transition-all duration-300 ${
+                  isExpanded ? "opacity-100 ml-2" : "opacity-0 w-0 overflow-hidden"
+                }`}
+              >
                 Logout
-              </div>
-            )}
+              </span>
+              {!isExpanded && (
+                <div className="absolute left-full top-1/2 -translate-y-1/2 ml-5 px-3 py-1 rounded bg-indigo-100 text-indigo-800 text-sm shadow-md opacity-0 group-hover:opacity-100 transition-opacity z-10 whitespace-nowrap">
+                  Logout
+                </div>
+              )}
           </button>
         </div>
       </nav>
